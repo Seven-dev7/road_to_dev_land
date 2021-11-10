@@ -8,10 +8,13 @@
       <p class="card-text">Position / Classement :<%= @response_content['leaderboardPosition']%></p>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">Combien de Kata crée : <%= @response_content['codeChallenges']['totalAuthored']%></li>
-        <li class="list-group-item">Combien de Kata accompli : <%= @response_content['codeChallenges']['totalCompleted']%></li>
+        <li class="list-group-item">
+          <div class="d-flex justify-content-between">
+            <span>Combien de Kata accompli : <%= @response_content['codeChallenges']['totalCompleted']%></span>
+            <span><%= link_to 'Retour', root_path %></span>
+          </div>
+        </li>
     </ul>
     </div>
   </div>
 </div>
-
-<%= link_to 'Retour', root_path %>

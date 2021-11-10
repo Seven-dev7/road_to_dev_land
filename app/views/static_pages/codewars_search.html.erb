@@ -1,0 +1,13 @@
+<h1>Chercher un user sur codewars</h1>
+
+<%= form_with(url: search_content_path, method: "get", local: true) do %>
+  <%= label_tag(:nickname, "Enter Codewars name:") %>
+  <%= text_field_tag(:nickname) %>
+  <%= submit_tag("Chercher") %>
+<% end %>
+
+<% if @response_content %>
+  <div>
+    <%= @response_content %>
+  </div>
+<% end %>

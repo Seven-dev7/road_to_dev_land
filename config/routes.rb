@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :user_profiles
+  resources :user_profiles, only: %i(show edit)
   root to: "static_pages#index"
-  get '/search' => 'static_pages#search', :as => 'search'
+
+  get '/codewars_search' => 'static_pages#codewars_search'
+  get '/search_content' => 'static_pages#search_content'
 end

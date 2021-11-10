@@ -1,3 +1,6 @@
 <h1>UserProfiles#show</h1>
 <p>Find me in app/views/user_profiles/show.html.erb</p>
-<%# @response %>
+<%= @user.user_profile.inspect %><br>
+<%= user_profile %><br>
+
+<%= link_to 'Modifier', edit_user_profile_path(user_profile) %>
