@@ -1,0 +1,23 @@
+<h1>Se Connecter </h1>
+<% if user_signed_in? %>
+  <%= link_to "Mon profile", user_profile_path(current_user) %>
+  <%= link_to "Se deconnecter", destroy_user_session_path(current_user), method: :delete %>
+<% else %>
+  <%= link_to 'Se Connecter', new_user_session_path %>
+  <%= link_to "S'enregistrer", new_user_registration_path %>
+<% end %>
+<p>Find me in app/views/static_pages/index.html.erb</p>
+
+<h2>Search for Codewars info</h2>
+
+<%= form_with(url: search_path, method: "get", local: true) do %>
+  <%= label_tag(:nickname, "Enter Codewars name:") %>
+  <%= text_field_tag(:nickname) %>
+  <%= submit_tag("Chercher") %>
+<% end %>
+
+<% if @response %>
+  <div>
+    <%= @response.body %>
+  </div>
+<% end %>
