@@ -9,7 +9,28 @@ class StaticPagesController < ApplicationController
   def search_content
     return redirect_to codewars_search_path, alert: "Veuillez entrer un pseudo valide" unless params[:nickname].present?
 
-    @response_body = CodewarsService::Search.by_nickname(nickname: params[:nickname]).body
-    @response_content = JSON.parse(@response_body)
+    response = CodewarsService::Search.by_nickname(nickname: params[:nickname])
+    return redirect_to codewars_search_path, alert: "Veuillez entrer un pseudo valide" unless response.status == 200
+
+    parsing_response(hash_values: response)
+  end
+
+  private
+
+  def parsing_response(hash_values:)
+    value = response_call(content: hash_values)
+    @parsed_data = {
+      username: value['username'],
+      name: value['name'],
+      clan: value['clan'],
+      honor: value ['honor'],
+      leaderboardPosition: value['leaderboardPosition'],
+      totalAuthored: value["codeChallenges"]['totalAuthored'],
+      totalCompleted: value["codeChallenges"]['totalCompleted']
+    }
+  end
+  
+  def response_call(content:)
+    JSON.parse(content.body)
   end
 end
