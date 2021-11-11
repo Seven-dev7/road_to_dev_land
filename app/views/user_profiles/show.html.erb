@@ -27,15 +27,15 @@
       <div class="card" style="width: 28rem;">
         <div class="card-body">
           <h5 class="card-title">Info du profile Codewars</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Pseudo: <%= @response_content['username'] %>, Nom: <%= @response_content['name'] %></h6>
-          <p class="card-text">Clan :<%= @response_content['clan']%></p>
-          <p class="card-text">Honneur :<%= @response_content['honor']%></p>
-          <p class="card-text">Position / Classement :<%= @response_content['leaderboardPosition']%></p>
+          <h6 class="card-subtitle mb-2 text-muted">Pseudo: <%= @parsed_data[:username] %>, Nom: <%= @parsed_data[:name] %></h6>
+          <p class="card-text">Clan :<%= @parsed_data[:clan]%></p>
+          <p class="card-text">Honneur :<%= @parsed_data[:honor]%></p>
+          <p class="card-text">Position / Classement :<%= @parsed_data[:leaderboardPosition]%></p>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Combien de Kata crée : <%= @response_content['codeChallenges']['totalAuthored']%></li>
+            <li class="list-group-item">Combien de Kata crée : <%= @parsed_data[:totalAuthored]%></li>
             <li class="list-group-item">
               <div class="d-flex justify-content-between">
-                <span>Combien de Kata accompli : <%= @response_content['codeChallenges']['totalCompleted']%></span>
+                <span>Combien de Kata accompli : <%= @parsed_data[:totalCompleted]%></span>
                 <span><%= link_to 'Retour', root_path %></span>
               </div>
             </li>

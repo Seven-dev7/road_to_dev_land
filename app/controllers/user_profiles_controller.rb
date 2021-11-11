@@ -2,9 +2,7 @@ class UserProfilesController < ApplicationController
   helper_method :user_profile
 
   def show
-    @user = user_profile.user
-    @response_body = CodewarsService::Search.by_nickname(nickname: 'Seven_7').body
-    @response_content = JSON.parse(@response_body)
+    parsing_response
   end
 
   def edit
@@ -12,14 +10,31 @@ class UserProfilesController < ApplicationController
   end
 
   def update
-    @user_profile = user_profile.update!(user_profile_params)
+    user_profile.update!(user_profile_params)
     redirect_to user_profile_path(user_profile), alert: 'Profile modifié'
   end
 
   private
 
+  def parsing_response
+    value = response_call
+    @parsed_data = {
+      username: value['username'],
+      name: value['name'],
+      clan: value['clan'],
+      honor: value ['honor'],
+      leaderboardPosition: value['leaderboardPosition'],
+      totalAuthored: value["codeChallenges"]['totalAuthored'],
+      totalCompleted: value["codeChallenges"]['totalCompleted']
+    }
+  end
+  
+  def response_call
+    @response_content = JSON.parse(CodewarsService::Search.by_nickname(nickname: user_profile.codewars_nickname).body)
+  end
+  
   def user_profile
-    user_profile = UserProfile.find params[:id]
+    user_profile = UserProfile.find(params[:id])
   end
 
   def user_profile_params
