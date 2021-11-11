@@ -15,7 +15,6 @@ class UserProfilesController < ApplicationController
     @user_profile = user_profile.update!(user_profile_params)
     redirect_to user_profile_path(user_profile), alert: 'Profile modifié'
   end
-  
 
   private
 
@@ -24,6 +23,6 @@ class UserProfilesController < ApplicationController
   end
 
   def user_profile_params
-    require(:user_profile).permit(:first_name, :last_name, :codewars_nickname, :city, :country)
+    params.require(:user_profile).permit(:first_name, :last_name, :codewars_nickname, :city, :country, :date_of_birth)
   end
 end

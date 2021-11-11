@@ -1,6 +1,48 @@
-<h1>UserProfiles#show</h1>
-<p>Find me in app/views/user_profiles/show.html.erb</p>
-<%= @user.user_profile.inspect %><br>
-<%= user_profile %><br>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card" style="width: 28rem;">
+        <div class="card-body">
+          <h5 class="card-title">Infor du compte</h5>
+          <h6 class="card-subtitle mb-2 text-muted"><%= user_profile.first_name %> <%= user_profile.last_name %></h6>
+          <p class="card-text">Pseudo CodeWars : <%= user_profile.codewars_nickname%></p>
+          <p class="card-text">Ville : <%= user_profile.city%></p>
+          <p class="card-text">Pays :<%= user_profile.country%></p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Date de Naissance :  <%= user_profile.date_of_birth%></li>
+            <li class="list-group-item">
+                <span>Email <%= user_profile.user.email %></span>
+            </li>
+            <li class="list-group-item">
+              <div class="d-flex justify-content-between">
+                <span><%= link_to "Modifier", edit_user_profile_path(user_profile) %></span>
+                <span><%= link_to 'Retour', root_path %></span>
+              </div>
+            </li>
+        </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card" style="width: 28rem;">
+        <div class="card-body">
+          <h5 class="card-title">Info du profile Codewars</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Pseudo: <%= @response_content['username'] %>, Nom: <%= @response_content['name'] %></h6>
+          <p class="card-text">Clan :<%= @response_content['clan']%></p>
+          <p class="card-text">Honneur :<%= @response_content['honor']%></p>
+          <p class="card-text">Position / Classement :<%= @response_content['leaderboardPosition']%></p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Combien de Kata crée : <%= @response_content['codeChallenges']['totalAuthored']%></li>
+            <li class="list-group-item">
+              <div class="d-flex justify-content-between">
+                <span>Combien de Kata accompli : <%= @response_content['codeChallenges']['totalCompleted']%></span>
+                <span><%= link_to 'Retour', root_path %></span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'Modifier', edit_user_profile_path(user_profile) %>
