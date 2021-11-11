@@ -25,23 +25,28 @@
     </div>
     <div class="col">
       <div class="card" style="width: 28rem;">
-        <div class="card-body">
-          <h5 class="card-title">Info du profile Codewars</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Pseudo: <%= @parsed_data[:username] %>, Nom: <%= @parsed_data[:name] %></h6>
-          <p class="card-text">Clan :<%= @parsed_data[:clan]%></p>
-          <p class="card-text">Honneur :<%= @parsed_data[:honor]%></p>
-          <p class="card-text">Position / Classement :<%= @parsed_data[:leaderboardPosition]%></p>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Combien de Kata crée : <%= @parsed_data[:totalAuthored]%></li>
-            <li class="list-group-item">
-              <div class="d-flex justify-content-between">
-                <span>Combien de Kata accompli : <%= @parsed_data[:totalCompleted]%></span>
-                <span><%= link_to 'Retour', root_path %></span>
-              </div>
-            </li>
-          </ul>
-        </div>
+        <% if codewars_info %>
+          <div class="card-body">
+            <h5 class="card-title">Info du profile Codewars</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Pseudo: <%= codewars_info.username %>, Nom: <%= codewars_info.name %></h6>
+            <p class="card-text">Clan :<%= codewars_info.clan%></p>
+            <p class="card-text">Honneur :<%= codewars_info.honor %></p>
+            <p class="card-text">Position / Classement :<%= codewars_info.leaderboard_position%></p>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Combien de Kata crée : <%= codewars_info.total_authored%></li>
+              <li class="list-group-item">
+                <div class="d-flex justify-content-between">
+                  <span>Combien de Kata accompli : <%= codewars_info.total_completed%></span>
+                  <span><%= link_to 'Retour', root_path %></span>
+                </div>
+              </li>
+              <li class="class-iem">
+              </li>
+            </ul>
+          </div>
+        <% end %>
       </div>
+      <%= button_to 'Mettre à jour les datas', codewars_data_path(id: user_profile.user) %>
     </div>
   </div>
 </div>

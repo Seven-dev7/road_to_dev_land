@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_one :user_profile
+  has_one :codewars_info
 
   after_create :create_profile 
 

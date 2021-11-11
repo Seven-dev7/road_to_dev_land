@@ -5,4 +5,5 @@ Rails.application.routes.draw do
 
   get '/codewars_search' => 'static_pages#codewars_search'
   get '/search_content' => 'static_pages#search_content'
+  post '/codewars_data', to: 'user_profiles#codewars_data'
 end
