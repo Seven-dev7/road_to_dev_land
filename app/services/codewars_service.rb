@@ -8,34 +8,26 @@ module CodewarsService
     end
 
     def process
-      save_data
+      update_data
     end
 
     private
 
-    def save_data
-      if @user.codewars_info
-        CodewarsInfo.update!(
-          username: parsed_json['username'],
-          name: parsed_json['name'],
-          clan: parsed_json['clan'],
-          honor: parsed_json['honor'],
-          leaderboard_position: parsed_json['leaderboardPosition'],
-          total_authored: parsed_json["codeChallenges"]['totalAuthored'],
-          total_completed: parsed_json["codeChallenges"]['totalCompleted']
-        )
-      else
-        CodewarsInfo.create!(
-          username: parsed_json['username'],
-          name: parsed_json['name'],
-          clan: parsed_json['clan'],
-          honor: parsed_json['honor'],
-          leaderboard_position: parsed_json['leaderboardPosition'],
-          total_authored: parsed_json["codeChallenges"]['totalAuthored'],
-          total_completed: parsed_json["codeChallenges"]['totalCompleted'],
-          user_id: @user.id
-        )
-      end
+    def update_data
+      instantiate_codewars_info.update!(
+        username: parsed_json['username'],
+        name: parsed_json['name'],
+        clan: parsed_json['clan'],
+        honor: parsed_json['honor'],
+        leaderboard_position: parsed_json['leaderboardPosition'],
+        total_authored: parsed_json["codeChallenges"]['totalAuthored'],
+        total_completed: parsed_json["codeChallenges"]['totalCompleted'],
+        user_id: @user.id
+      )
+    end
+
+    def instantiate_codewars_info
+      @codewars_info ||= CodewarsInfo.new
     end
 
     def parsed_json

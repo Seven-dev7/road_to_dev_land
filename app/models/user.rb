@@ -10,13 +10,6 @@ class User < ApplicationRecord
   after_create :create_profile 
 
   def create_profile
-    build_user_profile(
-      first_name: 'JP',
-      last_name: 'JOJO',
-      codewars_nickname: 'Felipé',
-      city: 'Ville',
-      country: 'France',
-      date_of_birth: Date.today  
-    ).save
+    build_user_profile.save
   end
 end

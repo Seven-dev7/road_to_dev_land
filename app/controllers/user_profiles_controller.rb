@@ -7,13 +7,14 @@ class UserProfilesController < ApplicationController
   end
 
   def codewars_data
+    return redirect_to user_profile_path(user_profile), alert: 'Pseudo Codewars inéxistant' unless user_profile.codewars_nickname
+
     CodewarsService::Search.new(user: user_profile.user).process
     redirect_to user_profile_path(user_profile), alert: 'Infos bien mis à jour'
   end
 
   private
 
-  
   def codewars_info
     @codewars_info ||= user_profile.user.codewars_info
   end
